@@ -29,7 +29,7 @@ int main() {
     ls << newl << "a log line"; 
     /* 
      * newl is a io manipulator, which flushes the LogStream internal buffer to the log system back-end
-     * and starts a  new log line.
+     * and starts a new log line.
      * You will see something like: 
      *
      * [DEBUG][TID: 18834][FILE: src/test/main.cc][FUNC: main][LINE: 11][2023-01-16 22:07:37.422158] a log line
@@ -91,7 +91,6 @@ NewLine::NewLine(const std::string &file, const std::string &func, int line) {
 }
 
 LogStream &NewLine::operator()(LogStream &ls) const {
-    ls.flush();
     ls.flush();
     ls << "[" << Logger::level_str[ls.level] << "]"
        << "[TID: " << ls.tid << "]" << context_;
