@@ -92,7 +92,9 @@ NewLine::NewLine(const std::string &file, const std::string &func, int line) {
 
 LogStream &NewLine::operator()(LogStream &ls) const {
     ls.flush();
-    ls << "[" << Logger::level_str[ls.level] << "]" << ls.tid << context_;
+    ls.flush();
+    ls << "[" << Logger::level_str[ls.level] << "]"
+       << "[TID: " << ls.tid << "]" << context_;
     return ls;
 }
  

@@ -10,7 +10,7 @@ namespace log {
 
 LogStream::LogStream(Logger::level level)
     : level(level), std::stringstream(std::ios::out | std::ios::ate),
-      tid("[TID: " + std::to_string(get_tid()) + "]") {}
+      tid(std::to_string(get_tid())) {}
 
 LogStream::~LogStream() { flush(); }
 
@@ -42,7 +42,8 @@ NewLine::NewLine(const std::string &file, const std::string &func, int line) {
 
 LogStream &NewLine::operator()(LogStream &ls) const {
     ls.flush();
-    ls << "[" << Logger::level_str[ls.level] << "]" << ls.tid << context_;
+    ls << "[" << Logger::level_str[ls.level] << "]"
+       << "[TID: " << ls.tid << "]" << context_;
     return ls;
 }
 
